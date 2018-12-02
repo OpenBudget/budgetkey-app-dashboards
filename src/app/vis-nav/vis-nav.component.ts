@@ -9,6 +9,7 @@ import { ApiService } from '../api.service';
 export class VisNavComponent implements OnInit {
 
   @Input() selectVis: string;
+  @Input() loadingStatus: any;
   @Output() selectVisChange = new EventEmitter<string>();
 
   constructor(public api: ApiService) { }

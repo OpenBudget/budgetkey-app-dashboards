@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ApiService } from '../api.service';
 import { Subscription } from 'rxjs';
 
@@ -11,6 +11,7 @@ export class VisTableComponent implements OnInit {
 
   data: any[] = null;
   @Input() query: string;
+  @Output() loading = new EventEmitter<boolean>();
   fields: any[];
   request: Subscription;
 
@@ -26,9 +27,9 @@ export class VisTableComponent implements OnInit {
 
   fig(x: number) {
     if (!x) {
-      return '';
+      return '&mdash;';
     }
-    const digs = x > 1000 ? 0 : 2;
+    const digs = Math.abs(x) > 1000 ? 0 : 2;
     const xstr = x.toLocaleString([], {minimumFractionDigits: digs,
                                        maximumFractionDigits: digs});
     return `<span class='fig'>${xstr}</span>`;
@@ -48,9 +49,11 @@ export class VisTableComponent implements OnInit {
       if (this.request) {
         this.request.unsubscribe();
       }
+      this.loading.emit(true);
       this.data = null;
       this.request = this.api.doQuery(this.query)
           .subscribe((rows) => {
+            this.loading.emit(false);
             this.data = rows;
           });
     });

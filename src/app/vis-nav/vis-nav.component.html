@@ -4,7 +4,9 @@
       <a class="nav-link"
         [class.active]="vis.title === selectVis"
         (click)='selectedVis(vis.title)'
-      >{{vis.title}}</a>
+      >
+      <i class='fas fa-spinner fa-spin' *ngIf='loadingStatus[vis.title]'></i>
+      {{vis.title}}</a>
     </li>
   </ul>
 </div></div>

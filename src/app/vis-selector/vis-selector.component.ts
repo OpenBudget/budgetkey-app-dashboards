@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ApiService } from '../api.service';
 
 @Component({
@@ -10,10 +10,15 @@ export class VisSelectorComponent implements OnInit {
 
   @Input() vis: any;
   @Input() visible: boolean;
+  @Output() loading = new EventEmitter<boolean>();
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  reportLoading(loading) {
+    this.loading.emit(loading);
   }
 
 }

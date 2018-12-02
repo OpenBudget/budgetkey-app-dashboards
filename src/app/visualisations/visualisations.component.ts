@@ -9,6 +9,7 @@ import { ApiService } from '../api.service';
 export class VisualisationsComponent implements OnInit {
 
   selectedVis: string;
+  loadingStatus = {};
 
   constructor(public api: ApiService) {
   }
