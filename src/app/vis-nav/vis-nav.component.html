@@ -1,0 +1,10 @@
+<div class='row'><div class='col'>
+  <ul class="nav nav-pills">
+    <li class="nav-item" *ngFor='let vis of api.config.visualisations'>
+      <a class="nav-link"
+        [class.active]="vis.title === selectVis"
+        (click)='selectedVis(vis.title)'
+      >{{vis.title}}</a>
+    </li>
+  </ul>
+</div></div>

@@ -1,0 +1,6 @@
+<input class="form-control form-control-lg" 
+        type="text" 
+        [placeholder]="api.config.placeholder"
+        (change)='api.search($event.target.value)'
+        (keyup)='api.search($event.target.value)'
+        >

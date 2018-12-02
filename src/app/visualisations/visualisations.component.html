@@ -1,0 +1,7 @@
+<ng-container *ngIf='(api.selectedItem | async)'>
+<app-vis-nav [(selectVis)]='selectedVis'></app-vis-nav>
+<app-vis-selector *ngFor='let vis of api.config.visualisations'
+  [vis]='vis'
+  [visible]='selectedVis === vis.title'>
+</app-vis-selector>
+</ng-container>

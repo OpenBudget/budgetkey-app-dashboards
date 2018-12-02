@@ -1,0 +1,13 @@
+<table class="table table-striped">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col" *ngFor='let f of fields'>{{f.title}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor='let row of data'>
+      <td *ngFor='let f of fields' [innerHtml]='f.formatter(row[f.field])'></td>
+    </tr>
+  </tbody>
+</table>
+<h3 *ngIf='!data'>בטעינה...</h3>

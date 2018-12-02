@@ -1,0 +1,14 @@
+<ul class="list-group" *ngIf='selected == null'>
+  <li class="list-group-item" 
+      *ngFor='let result of (api.searchResults | async)' 
+      [innerHtml]='render(result)'
+      (click)='selected=result'
+  >
+  </li>
+</ul>
+<ul class="list-group" *ngIf='selected != null'>
+  <li class="list-group-item">
+    <a (click)='selected=null'><strong>&times;</strong></a>&nbsp;
+    <span [innerHtml]='render(selected)'></span>
+  </li>
+</ul>
