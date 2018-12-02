@@ -4,7 +4,7 @@ kinds:
       placeholder: חיפוש תכנית תקציבית (למשל ״20.43.01״ או ״העברות לרשויות״)
       result_template: "{{{nice-code}}} - {{{title}}}"
       filters:
-        # depth: 3
+        depth: 3
         year: 2019
       visualisations:
         - title: היסטוריה תקציבית

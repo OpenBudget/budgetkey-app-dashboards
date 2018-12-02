@@ -3,6 +3,7 @@ export const config = {
     {
       "doctype": "budget",
       "filters": {
+        "depth": 3,
         "year": 2019
       },
       "placeholder": "חיפוש תכנית תקציבית (למשל ״20.43.01״ או ״העברות לרשויות״)",
