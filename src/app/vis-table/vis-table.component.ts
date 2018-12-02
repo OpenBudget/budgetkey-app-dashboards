@@ -44,12 +44,11 @@ export class VisTableComponent implements OnInit {
       const formatter = this[match[3]];
       this.fields.push({field, title, formatter});
     }
-    console.log(this.fields);
     this.api.selectedItem.subscribe((item) => {
-      console.log('cchchanged item!');
       if (this.request) {
         this.request.unsubscribe();
       }
+      this.data = null;
       this.request = this.api.doQuery(this.query)
           .subscribe((rows) => {
             this.data = rows;
