@@ -10,7 +10,7 @@ export class VisualisationsComponent implements OnInit {
 
   selectedVis: string;
 
-  constructor(private api: ApiService) {
+  constructor(public api: ApiService) {
   }
 
   ngOnInit() {

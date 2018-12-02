@@ -11,7 +11,7 @@ export class VisNavComponent implements OnInit {
   @Input() selectVis: string;
   @Output() selectVisChange = new EventEmitter<string>();
 
-  constructor(private api: ApiService) { }
+  constructor(public api: ApiService) { }
 
   ngOnInit() {
   }
