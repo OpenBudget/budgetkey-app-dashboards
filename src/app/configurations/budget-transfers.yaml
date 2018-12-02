@@ -45,6 +45,21 @@ kinds:
                     FROM raw_supports
                     WHERE budget_code LIKE ':code%%'
                     GROUP BY 1
+                    HAVING sum(amount_paid)>0
+                    ORDER BY 4 DESC nulls LAST
+                    LIMIT 20
+        - title: נושאי תמיכה עיקריים
+          kind: table
+          query: >
+                    SELECT support_title AS "נושא התמיכה:str",
+                          min(year_requested) as "משנת:str",
+                          max(year_paid) as "עד שנת:str",
+                          sum(amount_paid) as "סך שולם:fig",
+                          sum(amount_total) as "סך אושר:fig"
+                    FROM raw_supports
+                    WHERE budget_code LIKE ':code%%'
+                    GROUP BY 1
+                    HAVING sum(amount_paid)>0
                     ORDER BY 4 DESC nulls LAST
                     LIMIT 20
         - title: ספקים עיקריים
