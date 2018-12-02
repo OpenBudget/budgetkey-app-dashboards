@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { query } from '@angular/core/src/render3/query';
 import { ApiService } from '../api.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-vis-table',
@@ -12,6 +12,7 @@ export class VisTableComponent implements OnInit {
   data: any[] = null;
   @Input() query: string;
   fields: any[];
+  request: Subscription;
 
   constructor(private api: ApiService) { }
 
@@ -34,10 +35,6 @@ export class VisTableComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.api.doQuery(this.query)
-        .subscribe((rows) => {
-          this.data = rows;
-        });
     const aliases = RegExp('[Aa][Ss]\\s+"(([^":]+):([^"]+))"', 'g');
     this.fields = [];
     let match: any;
@@ -48,6 +45,16 @@ export class VisTableComponent implements OnInit {
       this.fields.push({field, title, formatter});
     }
     console.log(this.fields);
+    this.api.selectedItem.subscribe((item) => {
+      console.log('cchchanged item!');
+      if (this.request) {
+        this.request.unsubscribe();
+      }
+      this.request = this.api.doQuery(this.query)
+          .subscribe((rows) => {
+            this.data = rows;
+          });
+    });
   }
 
 }

@@ -21,8 +21,13 @@ export const config = {
         },
         {
           "kind": "table",
-          "query": "SELECT coalesce(entity_name, recipient) AS \"מקבל התמיכה:str\",\n      min(year_requested) as \"משנת:str\",\n      max(year_paid) as \"עד שנת:str\",\n      sum(amount_paid) as \"סך שולם:fig\",\n      sum(amount_total) as \"סך אושר:fig\"\nFROM raw_supports WHERE budget_code LIKE ':code%%' GROUP BY 1 ORDER BY 4 DESC nulls LAST LIMIT 20\n",
+          "query": "SELECT coalesce(entity_name, recipient) AS \"מקבל התמיכה:str\",\n      min(year_requested) as \"משנת:str\",\n      max(year_paid) as \"עד שנת:str\",\n      sum(amount_paid) as \"סך שולם:fig\",\n      sum(amount_total) as \"סך אושר:fig\"\nFROM raw_supports WHERE budget_code LIKE ':code%%' GROUP BY 1 HAVING sum(amount_paid)>0 ORDER BY 4 DESC nulls LAST LIMIT 20\n",
           "title": "נתמכים עיקריים"
+        },
+        {
+          "kind": "table",
+          "query": "SELECT support_title AS \"נושא התמיכה:str\",\n      min(year_requested) as \"משנת:str\",\n      max(year_paid) as \"עד שנת:str\",\n      sum(amount_paid) as \"סך שולם:fig\",\n      sum(amount_total) as \"סך אושר:fig\"\nFROM raw_supports WHERE budget_code LIKE ':code%%' GROUP BY 1 HAVING sum(amount_paid)>0 ORDER BY 4 DESC nulls LAST LIMIT 20\n",
+          "title": "נושאי תמיכה עיקריים"
         },
         {
           "kind": "table",
