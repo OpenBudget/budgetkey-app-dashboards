@@ -32,6 +32,13 @@ export class ApiService {
     console.log('term', term);
     if (term) {
       this.searchQueue.next({term, doctype, filters});
+      if (window['gtag']) {
+        window['gtag']('event', 'dashboard-search', {
+          'event_category': 'dashboard',
+          'event_label': term,
+          'value': 1
+        });
+      }
     }
   }
 
