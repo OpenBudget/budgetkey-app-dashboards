@@ -34,6 +34,16 @@ kinds:
                     from raw_budget_changes where budget_code like ':code%%'
                     and year>=2015
                     order by date desc
+        - title: סיכום העברות בשנה האחרונה
+          kind: table
+          query: >
+                    SELECT change_title as "סוג העברה:str",
+                          sum(net_expense_diff) as "סך שינוי נטו:fig"
+                    FROM raw_budget_changes
+                    WHERE budget_code LIKE ':code%%'
+                      AND YEAR=2018
+                      AND NOT pending
+                    GROUP BY 1
         - title: נתמכים עיקריים
           kind: table
           query: >
@@ -78,7 +88,7 @@ kinds:
         - title: התקשרויות מרכזיות
           kind: table
           query: >
-                    SELECT coalesce(entity_name, supplier_name->>0) AS "ספק:str",
+                    SELECT coalesce(entity_name, supplier_name->>0) AS "ספק:strw",
                           purpose as "מטרה:strw",
                           budget_title as "מתקציב:strw",
                           purchasing_unit as "המזמין:str",

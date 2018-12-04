@@ -22,6 +22,11 @@ export const config = {
         },
         {
           "kind": "table",
+          "query": "SELECT change_title as \"סוג העברה:str\",\n      sum(net_expense_diff) as \"סך שינוי נטו:fig\"\nFROM raw_budget_changes WHERE budget_code LIKE ':code%%'\n  AND YEAR=2018\n  AND NOT pending\nGROUP BY 1\n",
+          "title": "סיכום העברות בשנה האחרונה"
+        },
+        {
+          "kind": "table",
           "query": "SELECT coalesce(entity_name, recipient) AS \"מקבל התמיכה:str\",\n      min(year_requested) as \"משנת:str\",\n      max(year_paid) as \"עד שנת:str\",\n      sum(amount_paid) as \"סך שולם:fig\",\n      sum(amount_total) as \"סך אושר:fig\"\nFROM raw_supports WHERE budget_code LIKE ':code%%' GROUP BY 1 HAVING sum(amount_paid)>0 ORDER BY 4 DESC nulls LAST LIMIT 20\n",
           "title": "נתמכים עיקריים"
         },
@@ -37,7 +42,7 @@ export const config = {
         },
         {
           "kind": "table",
-          "query": "SELECT coalesce(entity_name, supplier_name->>0) AS \"ספק:str\",\n      purpose as \"מטרה:strw\",\n      budget_title as \"מתקציב:strw\",\n      purchasing_unit as \"המזמין:str\",\n      purchase_method as \"אופן רכישה:strw\",\n      min_year as \"משנת:str\",\n      executed as \"סך שולם עד כה:fig\",\n      volume as \"היקף ההתקשרות:fig\"\nFROM contract_spending WHERE budget_code LIKE ':code%%' ORDER BY 7 DESC nulls LAST LIMIT 20\n",
+          "query": "SELECT coalesce(entity_name, supplier_name->>0) AS \"ספק:strw\",\n      purpose as \"מטרה:strw\",\n      budget_title as \"מתקציב:strw\",\n      purchasing_unit as \"המזמין:str\",\n      purchase_method as \"אופן רכישה:strw\",\n      min_year as \"משנת:str\",\n      executed as \"סך שולם עד כה:fig\",\n      volume as \"היקף ההתקשרות:fig\"\nFROM contract_spending WHERE budget_code LIKE ':code%%' ORDER BY 7 DESC nulls LAST LIMIT 20\n",
           "title": "התקשרויות מרכזיות"
         }
       ]
