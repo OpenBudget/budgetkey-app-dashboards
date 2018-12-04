@@ -31,7 +31,7 @@ kinds:
                     allocated_income_diff as "הכנסה מיועדת:fig",
                     commitment_limit_diff as "הרשאה להתחייב:fig",
                     personnel_max_diff as "שיא כ״א:fig"
-                    from raw_budget_changes where budget_code=':code'
+                    from raw_budget_changes where budget_code like ':code%%'
                     and year>=2015
                     order by date desc
         - title: נתמכים עיקריים

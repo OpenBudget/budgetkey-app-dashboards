@@ -17,7 +17,7 @@ export const config = {
         },
         {
           "kind": "table",
-          "query": "select  coalesce(to_char(\"date\", 'YYYY/MM/DD'), 'טרם אושר') as \"תאריך:str\", change_title as \"סוג:str\", req_title as \"כותרת:strw\", net_expense_diff as \"נטו:fig\", gross_expense_diff as \"ברוטו:fig\", allocated_income_diff as \"הכנסה מיועדת:fig\", commitment_limit_diff as \"הרשאה להתחייב:fig\", personnel_max_diff as \"שיא כ״א:fig\" from raw_budget_changes where budget_code=':code' and year>=2015 order by date desc\n",
+          "query": "select  coalesce(to_char(\"date\", 'YYYY/MM/DD'), 'טרם אושר') as \"תאריך:str\", change_title as \"סוג:str\", req_title as \"כותרת:strw\", net_expense_diff as \"נטו:fig\", gross_expense_diff as \"ברוטו:fig\", allocated_income_diff as \"הכנסה מיועדת:fig\", commitment_limit_diff as \"הרשאה להתחייב:fig\", personnel_max_diff as \"שיא כ״א:fig\" from raw_budget_changes where budget_code like ':code%%' and year>=2015 order by date desc\n",
           "title": "העברות בשנים האחרונות"
         },
         {
