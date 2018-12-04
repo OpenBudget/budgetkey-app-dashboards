@@ -3,7 +3,6 @@ export const config = {
     {
       "doctype": "budget",
       "filters": {
-        "depth": 3,
         "year": 2019
       },
       "placeholder": "חיפוש תכנית תקציבית (למשל ״20.43.01״ או ״העברות לרשויות״)",
@@ -37,7 +36,7 @@ export const config = {
         },
         {
           "kind": "table",
-          "query": "SELECT coalesce(entity_name, supplier_name->>0) AS \"ספק:str\",\n      purpose as \"מטרה:strw\",\n      budget_title as \"מתקציב:strw\",\n      purchasing_unit as \"המזמין:str\",\n      purchase_method as \"אופן רכישה:strw\",\n      min_year as \"משנת:str\",\n      executed as \"סך שולם עד כה:fig\",\n      volume as \"היקף ההתקשרות:fig\"\nFROM contract_spending WHERE budget_code LIKE ':code%%' ORDER BY 7 DESC nulls LAST LIMIT 20",
+          "query": "SELECT coalesce(entity_name, supplier_name->>0) AS \"ספק:str\",\n      purpose as \"מטרה:strw\",\n      budget_title as \"מתקציב:strw\",\n      purchasing_unit as \"המזמין:str\",\n      purchase_method as \"אופן רכישה:strw\",\n      min_year as \"משנת:str\",\n      executed as \"סך שולם עד כה:fig\",\n      volume as \"היקף ההתקשרות:fig\"\nFROM contract_spending WHERE budget_code LIKE ':code%%' ORDER BY 7 DESC nulls LAST LIMIT 20\n",
           "title": "התקשרויות מרכזיות"
         }
       ]
