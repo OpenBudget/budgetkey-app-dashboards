@@ -58,9 +58,9 @@ export class ApiService {
 
   doSearch(params) {
     const URL = 'https://next.obudget.org/search';
-    let url = `${URL}/${params.doctype}/${encodeURIComponent(params.term)}`;
+    let url = `${URL}/${params.doctype}?q=${encodeURIComponent(params.term)}`;
     const filters = JSON.stringify(params.filters).slice(1, -1);
-    url += '?filter=' + encodeURIComponent(filters);
+    url += '&filter=' + encodeURIComponent(filters);
     return this.http
       .get(url)
       .pipe(
